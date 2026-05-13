@@ -1,0 +1,28 @@
+{
+  "enabled": true,
+  "triggerMode": "arm-during-streaming",
+  "cooldown": {
+    "minMsBetweenCompactions": 15000,
+    "requirePercentIncreaseBeforeRetrigger": 1
+  },
+  "immediate": {
+    "enabled": true,
+    "offsetPercentFromAuto": 1,
+    "customInstructions": "Preserve active code changes, pending tasks, and exact next actions.",
+    "postCompactPrompt": "Continue immediately from the compacted state and resume the highest-priority unfinished work.",
+    "deliverAs": "followUp",
+    "triggerTurn": true
+  },
+  "overflow": {
+    "enabled": true,
+    "percent": 100,
+    "customInstructions": "Preserve only critical continuation context for safe recovery.",
+    "postCompactPrompt": "Context overflow threshold was exceeded. Continue with strict brevity and finish the active objective before expanding scope.",
+    "deliverAs": "followUp",
+    "triggerTurn": true
+  },
+  "engine": {
+    "kind": "auto",
+    "command": null
+  }
+}

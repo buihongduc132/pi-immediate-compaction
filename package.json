@@ -1,0 +1,31 @@
+{
+  "name": "pi-immediate-compaction",
+  "version": "0.1.0",
+  "description": "Immediate compaction extension for Pi CLI agent — proactive context window management with configurable thresholds",
+  "private": true,
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "test": "vitest run --coverage",
+    "test:ci": "vitest run --coverage",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buihongduc132/pi-immediate-compaction"
+  },
+  "keywords": [
+    "pi",
+    "compaction",
+    "context-window",
+    "cli-agent"
+  ],
+  "author": "buihongduc132",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.9.1",
+    "@vitest/coverage-v8": "^3.2.4",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  }
+}
