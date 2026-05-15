@@ -1,3 +1,5 @@
+export type { CompactionSource } from "./types";
+
 export {
 	DEFAULT_CONFIG,
 	computeAutoCompactPercent,

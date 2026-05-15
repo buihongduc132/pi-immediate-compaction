@@ -65,6 +65,7 @@ export class CompactionCoordinator {
 		}
 		state.inFlight = true;
 		state.phase = "compacting";
+		state.lastTriggerSource = "automated";
 		state.lastTriggeredKind = decision.kind;
 		state.lastTriggeredPercent = snapshot.percent;
 		state.lastTriggeredAt = this.runtime.now();
@@ -79,6 +80,8 @@ export class CompactionCoordinator {
 		state.compactionEpoch += 1;
 		state.cooldownUntil =
 			this.runtime.now() + this.config.cooldown.minMsBetweenCompactions;
+		// Reset source — session_compact hook reads it before this call.
+		state.lastTriggerSource = "unknown";
 	}
 
 	handleFreshUsage(

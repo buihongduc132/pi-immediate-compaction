@@ -17,6 +17,7 @@ export function createCoordinatorState(): CoordinatorState {
 		lastPromptEpoch: 0,
 		inFlight: false,
 		armedDecision: null,
+		lastTriggerSource: "unknown",
 	};
 }
 
