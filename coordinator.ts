@@ -99,6 +99,7 @@ export class CompactionCoordinator {
 		this.current.inFlight = false;
 		this.current.awaitingFreshUsage = true;
 		this.current.phase = "awaiting_fresh_usage";
+		this.current.lastTriggerSource = "unknown";
 		this.current.compactionEpoch += 1;
 		this.current.cooldownUntil = input.now + input.cooldownMs;
 	}
@@ -236,6 +237,7 @@ export function maybeTriggerCompaction(
 	}
 	state.inFlight = true;
 	state.phase = "compacting";
+	state.lastTriggerSource = "automated";
 	state.lastTriggeredKind = decision.kind;
 	state.lastTriggeredPercent = input.snapshot.percent;
 	state.lastTriggeredAt = Date.now();
@@ -255,6 +257,7 @@ export function markCompactionFinished(
 	state.inFlight = false;
 	state.awaitingFreshUsage = true;
 	state.phase = "awaiting_fresh_usage";
+	state.lastTriggerSource = "unknown";
 	state.compactionEpoch += 1;
 	state.cooldownUntil = input.now + input.cooldownMs;
 }
