@@ -1,6 +1,7 @@
 export type TriggerKind = "immediate" | "overflow";
 export type TriggerMode = "idle-only" | "arm-during-streaming";
 export type DeliveryMode = "followUp" | "steer";
+export type CompactionSource = "automated" | "unknown";
 export type CoordinatorPhase =
 	| "idle"
 	| "armed_immediate"
@@ -53,6 +54,7 @@ export interface CoordinatorState {
 	lastPromptEpoch: number;
 	inFlight: boolean;
 	armedDecision: ThresholdDecision | null;
+	lastTriggerSource: CompactionSource;
 }
 
 export interface TriggerConfig {
