@@ -1,9 +1,10 @@
 import { normalizeThresholdArgs, type ThresholdLogic } from "./types";
+import type { CoordinatorState, ImmediateCompactionConfig, TriggerEvaluationContext, UsageSnapshot } from "../types";
 
 export function createImmediateThreshold(): ThresholdLogic {
 	return {
 		id: "immediate",
-		evaluate(snapshot, contextOrConfig, maybeState) {
+		evaluate(snapshot: UsageSnapshot, contextOrConfig: TriggerEvaluationContext | ImmediateCompactionConfig, maybeState?: CoordinatorState) {
 			const context = normalizeThresholdArgs(contextOrConfig, maybeState);
 			if (!context.config.immediate.enabled) return null;
 			if (!snapshot.valid || snapshot.percent === null) return null;

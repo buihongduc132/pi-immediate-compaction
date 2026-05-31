@@ -3,3 +3,13 @@ coverage/
 .env
 .env.*
 *.tsbuildinfo
+.fusion
+.pi
+.claude/
+.gitnexus/
+AGENTS.md
+CLAUDE.md
+sgconfig.yml
+.sgignore
+.sg-rules/
+.sg-sha

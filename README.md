@@ -1,21 +1,37 @@
 # pi-immediate-compaction
 
-Proactive context window management for [Pi](https://github.com/nicobailon/pi) CLI agent.
+[![npm version](https://img.shields.io/npm/v/pi-immediate-compaction.svg)](https://www.npmjs.com/package/pi-immediate-compaction) [![license](https://img.shields.io/npm/l/pi-immediate-compaction.svg)](https://github.com/buihongduc132/pi-immediate-compaction/blob/main/LICENSE) [![pi-package](https://img.shields.io/badge/pi-package-blue)](https://github.com/buihongduc132/pi-immediate-compaction)
 
-Monitors context window usage in real-time and triggers compaction **before** the auto-compaction threshold — preserving critical context like active code changes, pending tasks, and next actions.
+Proactive context window management for [Pi CLI agent](https://github.com/nicobailon/pi). Monitors context window usage in real-time and triggers compaction **before** the auto-compaction threshold — preserving critical context like active code changes, pending tasks, and next actions.
 
 ## Features
 
-- **Immediate compaction**: Triggers compaction slightly before Pi's built-in auto-compact, with custom instructions to preserve essential context
-- **Overflow protection**: Hard stop at 100% context usage with minimal context preservation
-- **Configurable thresholds**: Offset from auto-compact, custom instructions, post-compact prompts
-- **Multiple engine support**: Auto-detect or use external compaction tools (e.g., pi-vcc)
-- **Cooldown management**: Prevents compaction thrashing with configurable cooldown windows
-- **Usage tracking**: Records context usage snapshots for threshold evaluation
+- **Immediate compaction** — Triggers compaction slightly before Pi's built-in auto-compact, with custom instructions to preserve essential context
+- **Overflow protection** — Hard stop at 100% context usage with minimal context preservation
+- **Configurable thresholds** — Offset from auto-compact, custom instructions, post-compact prompts
+- **Multiple engine support** — Auto-detect or use external compaction tools (e.g., pi-vcc)
+- **Cooldown management** — Prevents compaction thrashing with configurable cooldown windows
+- **Usage tracking** — Records context usage snapshots for threshold evaluation
 
-## Install
+## Installation
 
-Add to your Pi `settings.json` packages array:
+### For humans
+
+```bash
+npm install pi-immediate-compaction
+```
+
+### For AI agents (Pi settings.json)
+
+```json
+{
+  "packages": [
+    "pi-immediate-compaction"
+  ]
+}
+```
+
+### Git-sourced
 
 ```json
 {
@@ -25,7 +41,7 @@ Add to your Pi `settings.json` packages array:
 }
 ```
 
-Or use as a local package:
+Or local path:
 
 ```json
 {
@@ -35,9 +51,15 @@ Or use as a local package:
 }
 ```
 
+## Usage
+
+The extension hooks into Pi's `message_end` / `turn_end` lifecycle events. It evaluates context window usage after each assistant turn and triggers compaction when thresholds are crossed.
+
+No manual invocation needed — the extension activates automatically when loaded as a Pi package.
+
 ## Configuration
 
-Create an `immediate-compaction.json` in your project or global config:
+Create an `immediate-compaction.json` in your project or global config (`~/.pi/immediate-compaction.json`):
 
 ```json
 {
@@ -72,6 +94,16 @@ Create an `immediate-compaction.json` in your project or global config:
 
 See `immediate-compaction.example.json` for full options.
 
+### Engine Options
+
+| `engine.kind` | Behavior |
+|---|---|
+| `"auto"` | Auto-detect: uses VCC if available, falls back to core |
+| `"vcc"` | Always use pi-vcc adapter |
+| `"core"` | Always use built-in core engine |
+| `"command"` | Use external command via `engine.command` |
+| `"custom"` | Load custom engine from `engine.custom.path` |
+
 ## Architecture
 
 ```
@@ -104,3 +136,7 @@ npm test
 ## License
 
 MIT © 2025 buihongduc132
+
+## Repository
+
+[github.com/buihongduc132/pi-immediate-compaction](https://github.com/buihongduc132/pi-immediate-compaction)

@@ -86,7 +86,7 @@ export class CompactionCoordinator {
 
 	handleFreshUsage(
 		state: CoordinatorState = this.current,
-		usage: { percent?: number | null },
+		usage: { percent?: number | null; tokens?: number | null; contextWindow?: number | null },
 	): void {
 		state.lastPercent = usage.percent ?? null;
 		state.awaitingFreshUsage = false;

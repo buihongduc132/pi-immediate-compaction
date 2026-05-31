@@ -1,9 +1,10 @@
 import { normalizeThresholdArgs, type ThresholdLogic } from "./types";
+import type { CoordinatorState, ImmediateCompactionConfig, TriggerEvaluationContext, UsageSnapshot } from "../types";
 
 export function createOverflowThreshold(): ThresholdLogic {
 	return {
 		id: "overflow",
-		evaluate(snapshot, contextOrConfig, maybeState) {
+		evaluate(snapshot: UsageSnapshot, contextOrConfig: TriggerEvaluationContext | ImmediateCompactionConfig, maybeState?: CoordinatorState) {
 			const context = normalizeThresholdArgs(contextOrConfig, maybeState);
 			if (!context.config.overflow.enabled) return null;
 			if (!snapshot.valid || snapshot.percent === null) return null;
